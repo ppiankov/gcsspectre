@@ -1,0 +1,4 @@
+FROM gcr.io/distroless/static-debian12:nonroot
+COPY gcsspectre /usr/local/bin/gcsspectre
+USER nonroot:nonroot
+ENTRYPOINT ["gcsspectre"]
