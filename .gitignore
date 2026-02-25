@@ -1,0 +1,13 @@
+bin/
+dist/
+coverage.out
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+.DS_Store
+.env
+.gcsspectre.yaml
+.gcsspectre.yml

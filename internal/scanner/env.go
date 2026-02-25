@@ -1,0 +1,63 @@
+package scanner
+
+import (
+	"bufio"
+	"os"
+	"regexp"
+)
+
+var envBucketPattern = regexp.MustCompile(`(?i)(?:GCS_BUCKET|BUCKET|STORAGE_BUCKET|BUCKET_NAME)=['"]?([a-z0-9][a-z0-9\-_\.]{1,61}[a-z0-9])['"]?`)
+
+// scanEnv scans environment files for GCS bucket references.
+func scanEnv(filePath string) ([]Reference, error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return nil, err
+	}
+	defer func() { _ = file.Close() }()
+
+	var refs []Reference
+	sc := bufio.NewScanner(file)
+	lineNum := 0
+
+	for sc.Scan() {
+		lineNum++
+		line := sc.Text()
+
+		// Skip comments
+		if len(line) > 0 && line[0] == '#' {
+			continue
+		}
+
+		// Check for gs:// URLs
+		if matches := gcsURLPattern.FindAllStringSubmatch(line, -1); matches != nil {
+			for _, match := range matches {
+				refs = append(refs, Reference{
+					Bucket:  match[1],
+					Prefix:  match[2],
+					File:    filePath,
+					Line:    lineNum,
+					Context: "env",
+				})
+			}
+		}
+
+		// Check for environment variable bucket references
+		if matches := envBucketPattern.FindAllStringSubmatch(line, -1); matches != nil {
+			for _, match := range matches {
+				refs = append(refs, Reference{
+					Bucket:  match[1],
+					File:    filePath,
+					Line:    lineNum,
+					Context: "env",
+				})
+			}
+		}
+	}
+
+	if err := sc.Err(); err != nil {
+		return nil, err
+	}
+
+	return refs, nil
+}
