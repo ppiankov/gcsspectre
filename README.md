@@ -1,5 +1,6 @@
 # GCSSpectre
 
+[![ANCC](https://img.shields.io/badge/ANCC-compliant-brightgreen)](https://ancc.dev)
 [![CI](https://github.com/ppiankov/gcsspectre/actions/workflows/ci.yml/badge.svg)](https://github.com/ppiankov/gcsspectre/actions/workflows/ci.yml)
 [![Go 1.25+](https://img.shields.io/badge/Go-1.25+-00ADD8?logo=go&logoColor=white)](https://go.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -244,15 +245,31 @@ Key design decisions:
 - **No real-time monitoring.** GCSSpectre is a point-in-time scanner, not a daemon. Run it in CI or on a schedule.
 - **Single project.** Cross-project scanning is not supported. Run separately per project.
 
+## Project Status
+
+**Status: Beta** · **v0.1.0** · Pre-1.0
+
+| Milestone | Status |
+|-----------|--------|
+| Scan mode: code-vs-GCS drift detection | Complete |
+| Discover mode: 7 audit signals across all buckets | Complete |
+| Multi-format repo scanner (regex, YAML, Terraform, JSON, .env) | Complete |
+| Baseline diff engine for CI gating | Complete |
+| 4 output formats (text, JSON, SARIF, SpectreHub) | Complete |
+| Config file + init command with IAM policy generation | Complete |
+| CI pipeline (test/lint/build) | Complete |
+| Homebrew + Docker distribution | Complete |
+| API stability guarantees | Partial |
+| v1.0 release | Planned |
+
+Pre-1.0: CLI flags and config schemas may change between minor versions. JSON output structure (`spectre/v1`) is stable.
+
 ## Roadmap
 
 - Cost estimation for unused and stale resources
 - Deep prefix scanning with pagination
 - Cross-project scanning
 - Object versioning age analysis
-- Naming convention enforcement
-- Historical trend tracking
-- SpectreHub integration for cross-tool correlation
 
 ## License
 
