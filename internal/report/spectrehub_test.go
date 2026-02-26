@@ -34,8 +34,8 @@ func TestSpectreHubReporter_Generate(t *testing.T) {
 		t.Fatalf("invalid JSON: %v", err)
 	}
 
-	if envelope.Schema != "spectrehub/v1" {
-		t.Fatalf("expected schema spectrehub/v1, got %q", envelope.Schema)
+	if envelope.Schema != "spectre/v1" {
+		t.Fatalf("expected schema spectre/v1, got %q", envelope.Schema)
 	}
 	if envelope.Tool != "gcsspectre" {
 		t.Fatalf("expected tool gcsspectre, got %q", envelope.Tool)
