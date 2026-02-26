@@ -57,7 +57,7 @@ func NewSpectreHubReporter(w io.Writer) *SpectreHubReporter {
 // Generate writes scan results as a spectrehub/v1 envelope.
 func (r *SpectreHubReporter) Generate(data Data) error {
 	envelope := spectreEnvelope{
-		Schema:    "spectrehub/v1",
+		Schema:    "spectre/v1",
 		Tool:      "gcsspectre",
 		Version:   data.Version,
 		Timestamp: data.Timestamp.UTC().Format("2006-01-02T15:04:05Z"),
@@ -92,7 +92,7 @@ func (r *SpectreHubReporter) Generate(data Data) error {
 // GenerateDiscovery writes discovery results as a spectrehub/v1 envelope.
 func (r *SpectreHubReporter) GenerateDiscovery(data DiscoveryData) error {
 	envelope := spectreEnvelope{
-		Schema:    "spectrehub/v1",
+		Schema:    "spectre/v1",
 		Tool:      "gcsspectre",
 		Version:   data.Version,
 		Timestamp: data.Timestamp.UTC().Format("2006-01-02T15:04:05Z"),
