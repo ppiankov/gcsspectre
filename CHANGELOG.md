@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Discover mode (`gcsspectre discover`): inspects all GCS buckets in a GCP project without requiring code references, with 7 audit signals: NO_LIFECYCLE, STALE_OBJECTS, VERSION_BLOAT, PUBLIC_BUCKET, NO_UNIFORM_ACCESS, CROSS_PROJECT, RETENTION_GAP
 - Init command (`gcsspectre init`): generates `.gcsspectre.yaml` config and prints minimum IAM policy
 - Repository scanners for Terraform (`google_storage_bucket`), YAML, JSON, .env files, and source code (`gs://` URL and bucket name extraction)
-- Four output formats: text, JSON (spectre/v1), SARIF (v2.1.0), SpectreHub (spectrehub/v1)
+- Four output formats: text, JSON (spectre/v1), SARIF (v2.1.0), SpectreHub (spectre/v1)
 - Baseline diff mode: `--baseline` and `--update-baseline` flags for suppressing known findings
 - Config file support: `.gcsspectre.yaml` in CWD or home directory
 - Structured logging via `log/slog` with `--verbose` flag
