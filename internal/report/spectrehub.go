@@ -44,7 +44,7 @@ func HashProject(projectID string) string {
 	return fmt.Sprintf("sha256:%x", h)
 }
 
-// SpectreHubReporter generates spectrehub/v1 JSON envelope output.
+// SpectreHubReporter generates spectre/v1 JSON envelope output.
 type SpectreHubReporter struct {
 	writer io.Writer
 }
@@ -54,7 +54,7 @@ func NewSpectreHubReporter(w io.Writer) *SpectreHubReporter {
 	return &SpectreHubReporter{writer: w}
 }
 
-// Generate writes scan results as a spectrehub/v1 envelope.
+// Generate writes scan results as a spectre/v1 envelope.
 func (r *SpectreHubReporter) Generate(data Data) error {
 	envelope := spectreEnvelope{
 		Schema:    "spectre/v1",
@@ -89,7 +89,7 @@ func (r *SpectreHubReporter) Generate(data Data) error {
 	return enc.Encode(envelope)
 }
 
-// GenerateDiscovery writes discovery results as a spectrehub/v1 envelope.
+// GenerateDiscovery writes discovery results as a spectre/v1 envelope.
 func (r *SpectreHubReporter) GenerateDiscovery(data DiscoveryData) error {
 	envelope := spectreEnvelope{
 		Schema:    "spectre/v1",
